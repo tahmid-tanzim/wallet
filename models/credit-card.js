@@ -35,7 +35,10 @@ CreditCard.init({
   },
   expire_date: {
     type: DataTypes.DATEONLY,
-    allowNull: true
+    allowNull: true,
+    validate: {
+      isDate: { msg: 'Valid date format YYYY-MM-DD required' }
+    }
   }
 }, {
   sequelize,

@@ -20,14 +20,4 @@ userRouter.put("/:userUUID", userController.update);
 // DELETE ONE User
 userRouter.delete("/:userUUID", userController.delete);
 
-// userRouter.get("/error", async (req, res, next) => {
-//     let result;
-//     try {
-//         result = await userService.getUsersFails();
-//         return res.status(httpStatusCodes.OK).send({ message: result });
-//     } catch (error) {
-//         return res.status(error.errorCode).send(error.message);
-//     }
-// });
-
 export default userRouter;

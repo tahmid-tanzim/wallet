@@ -1,5 +1,5 @@
 import { CreditCard, User } from "../models/index.js";
-import exceptions from "../helpers/errors/exceptions.js";
+// import exceptions from "../helpers/errors/exceptions.js";
 
 class CreditCardService {
 
@@ -19,7 +19,7 @@ class CreditCardService {
             });
             return creditCards;
         } catch (error) {
-            throw new exceptions.NotFoundError(error)
+            // throw new exceptions.NotFoundError(error)
         }
     }
 
@@ -40,7 +40,7 @@ class CreditCardService {
 
             return user.credit_cards;
         } catch (error) {
-            throw new exceptions.NotFoundError(error)
+            // throw new exceptions.NotFoundError(error)
         }
     }
 
@@ -58,7 +58,7 @@ class CreditCardService {
             });
             return creditCard;
         } catch (error) {
-            throw new exceptions.NotFoundError(error)
+            // throw new exceptions.NotFoundError(error)
         }
     }
 
@@ -73,7 +73,7 @@ class CreditCardService {
             return credit_card;
         } catch (error) {
             console.log("ERROR!! - ", JSON.stringify(error, null, 2))
-            throw new exceptions.BadRequestError(error)
+            // throw new exceptions.BadRequestError(error)
         }
     }
 
@@ -83,7 +83,7 @@ class CreditCardService {
                     where: { uuid }
                 });
         } catch (error) {
-            throw new exceptions.BadRequestError(error)
+            // throw new exceptions.BadRequestError(error)
         }
     }
 
@@ -93,7 +93,7 @@ class CreditCardService {
                 where: { uuid }
             });
         } catch (error) {
-            throw new exceptions.BadRequestError(error)
+            // throw new exceptions.BadRequestError(error)
         }
     }
 }

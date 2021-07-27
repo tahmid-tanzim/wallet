@@ -17,9 +17,8 @@ app.use("/v1/credit-cards", creditCards.parentNode);
 
 const port = config.get('service.port') || 3030;
 const serviceName = config.get('service.name');
-app.listen({port}, async () => {
+app.listen({ port }, async () => {
     console.log(`${serviceName} service running on port - ${port}`);
-    // await sequelize.authenticate();
     await sequelize.sync({ force: true, match: /_development$/ });
     console.log(`${serviceName} database connected!`);
 });

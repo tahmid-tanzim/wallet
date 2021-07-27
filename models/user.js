@@ -20,6 +20,7 @@ User.init({
     validate: {
       notNull: { msg: 'First Name required' },
       notEmpty: { msg: 'First Name must not be empty' },
+      isAlpha: { msg: 'First Name must have only letters' }
     }
   },
   last_name: {
@@ -28,6 +29,7 @@ User.init({
     validate: {
       notNull: { msg: 'Last Name required' },
       notEmpty: { msg: 'Last Name must not be empty' },
+      isAlpha: { msg: 'Last Name must have only letters' }
     }
   },
   email: {
@@ -40,7 +42,10 @@ User.init({
   },
   date_of_birth: {
     type: DataTypes.DATEONLY,
-    allowNull: true
+    allowNull: true,
+    validate: {
+      isDate: { msg: 'Valid date format YYYY-MM-DD required' }
+    }
   }
 }, {
   sequelize,

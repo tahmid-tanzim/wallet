@@ -3,50 +3,47 @@ import userService from "../services/user-service.js";
 
 class UserController {
     async get(req, res, next) {
-        let result;
         try {
-            result = await userService.getOne(req.params.userUUID);
-            return res.status(httpStatusCodes.OK).send(result);
+            const result = await userService.getOne(req.params.userUUID);
+            return res.status(result.statusCode).send(result);
         } catch (error) {
-            throw new Error(error);
+            return res.status(error.statusCode).send(error);
         }
     };
 
     async list(req, res, next) {
-        let result;
         try {
-            result = await userService.getAll();
-            return res.status(httpStatusCodes.OK).send(result);
+            const result = await userService.getAll();
+            return res.status(result.statusCode).send(result);
         } catch (error) {
-            throw new Error(error);
+            return res.status(error.statusCode).send(error);
         }
     };
 
     async create(req, res, next) {
-        let result;
         try {
-            result = await userService.create(req.body);
-            return res.status(httpStatusCodes.CREATED).send(result);
+            const result = await userService.create(req.body);
+            return res.status(result.statusCode).send(result);
         } catch (error) {
-            throw new Error(error);
+            return res.status(error.statusCode).send(error);
         }
     }
 
     async update(req, res, next) {
         try {
-            await userService.update(req.params.userUUID, req.body);
-            return res.status(httpStatusCodes.OK).send({ message: "User updated successfully" });
+            const result = await userService.update(req.params.userUUID, req.body);
+            return res.status(result.statusCode).send(result);
         } catch (error) {
-            throw new Error(error);
+            return res.status(error.statusCode).send(error);
         }
     }
 
     async delete(req, res, next) {
         try {
-            await userService.delete(req.params.userUUID);
-            return res.status(httpStatusCodes.OK).send({ message: "User deleted successfully" });
+            const result = await userService.delete(req.params.userUUID);
+            return res.status(result.statusCode).send(result);
         } catch (error) {
-            throw new Error(error);
+            return res.status(error.statusCode).send(error);
         }
     }
 };

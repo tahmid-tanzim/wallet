@@ -6,6 +6,7 @@ A simple CRUD application with User & Credit Card as One-to-Many relationship.
 * npm run db:create
 * npm run dev
 
+### Docker
 docker build . -t tanzim/wallet
 docker run -p 3000:3000 -d tanzim/wallet
 
@@ -27,7 +28,8 @@ docker run -p 3000:3000 -d tanzim/wallet
 | 13  | DELETE    | /v1/credit-cards/:creditCardUUID                 | Delete credit card (#13 == #14) |
 | 14  | DELETE    | /v1/users/:userUUID/credit-cards/:creditCardUUID | Delete credit card (#13 == #14) |
 
-### User Request Body
+### Request Body
+##### User
 ```
 {
     "first_name": "Tahmid", 
@@ -37,7 +39,7 @@ docker run -p 3000:3000 -d tanzim/wallet
 }        
 ```                                           
 
-### CreditCard Request Body
+##### CreditCard
 ```
 {
     "number": "4012888888881881", 
