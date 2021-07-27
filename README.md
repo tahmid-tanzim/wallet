@@ -11,7 +11,7 @@ docker run -p 3000:3000 -d tanzim/wallet
 
 ### API Documentation
 |  # | HTTP Verb | Request URL         |
-| -- |:---------:| :------------------:|
+| -- |:----------|:--------------------|
 | 1  | GET       | /v1/users           |
 | 2  | GET       | /v1/users/:userUUID |
 | 3  | POST      | /v1/users           |
