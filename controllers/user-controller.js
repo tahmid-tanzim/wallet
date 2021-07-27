@@ -1,4 +1,3 @@
-import httpStatusCodes from "http-status-codes";
 import userService from "../services/user-service.js";
 
 class UserController {

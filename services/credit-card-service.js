@@ -1,5 +1,5 @@
 import { CreditCard, User } from "../models/index.js";
-// import exceptions from "../helpers/errors/exceptions.js";
+import responseBody from "../helpers/response-body.js";
 
 class CreditCardService {
 
@@ -17,9 +17,9 @@ class CreditCardService {
                     }
                 ]
             });
-            return creditCards;
-        } catch (error) {
-            // throw new exceptions.NotFoundError(error)
+            return new responseBody.Success(creditCards);
+        } catch (err) {
+            return new responseBody.BadRequestError([], err.message);
         }
     }
 
@@ -37,10 +37,12 @@ class CreditCardService {
                     }
                 ]
             });
-
-            return user.credit_cards;
-        } catch (error) {
-            // throw new exceptions.NotFoundError(error)
+            return new responseBody.Success(user.credit_cards);
+        } catch (err) {
+            return new responseBody.NotFoundError([{
+                message: "Sorry! User NOT Found",
+                path: userUUID
+            }]);
         }
     }
 
@@ -56,9 +58,12 @@ class CreditCardService {
                     }
                 ]
             });
-            return creditCard;
-        } catch (error) {
-            // throw new exceptions.NotFoundError(error)
+            return new responseBody.Success(creditCard);
+        } catch (err) {
+            return new responseBody.NotFoundError([{
+                message: "Sorry! Credit Card NOT Found",
+                path: uuid
+            }]);
         }
     }
 
@@ -68,22 +73,36 @@ class CreditCardService {
                 where: { uuid: userUUID },
                 attributes: ['id']
             });
-            
-            const credit_card = await CreditCard.create({...requestBody, userId: user.id});
-            return credit_card;
-        } catch (error) {
-            console.log("ERROR!! - ", JSON.stringify(error, null, 2))
-            // throw new exceptions.BadRequestError(error)
+
+            const credit_card = await CreditCard.create({ ...requestBody, userId: user.id });
+            return new responseBody.Created(credit_card, "Credit Card created successfully");
+        } catch (err) {
+            if (err.name == "SequelizeValidationError") {
+                return new responseBody.ValidationError(err);
+            }
+
+            return new responseBody.NotFoundError([{
+                message: "Sorry! User NOT Found",
+                path: userUUID
+            }]);
         }
     }
 
     async update(uuid, requestBody) {
         try {
             await CreditCard.update(requestBody, {
-                    where: { uuid }
-                });
-        } catch (error) {
-            // throw new exceptions.BadRequestError(error)
+                where: { uuid }
+            });
+            return new responseBody.Success({ uuid }, "Credit Card updated successfully");
+        } catch (err) {
+            if (err.name == "SequelizeValidationError") {
+                return new responseBody.ValidationError(err);
+            }
+
+            return new responseBody.NotFoundError([{
+                message: "Sorry! Credit Card NOT Found",
+                path: uuid
+            }]);
         }
     }
 
@@ -92,12 +111,15 @@ class CreditCardService {
             await CreditCard.destroy({
                 where: { uuid }
             });
-        } catch (error) {
-            // throw new exceptions.BadRequestError(error)
+            return new responseBody.Success({ uuid }, "Credit Card removed successfully");
+        } catch (err) {
+            return new responseBody.NotFoundError([{
+                message: "Sorry! Credit Card NOT Found",
+                path: uuid
+            }]);
         }
     }
 }
-
 
 const creditCardService = new CreditCardService();
 export default creditCardService;

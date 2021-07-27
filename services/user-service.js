@@ -39,7 +39,6 @@ class UserService {
         } catch (err) {
             return new responseBody.NotFoundError([{
                 message: "Sorry! User NOT Found",
-                type: "Not Found",
                 path: uuid
             }]);
         }
@@ -48,10 +47,9 @@ class UserService {
     async create(requestBody) {
         try {
             const user = await User.create(requestBody);
-            return new responseBody.Created(user, "User Created Successfully");
+            return new responseBody.Created(user, "User created successfully");
         } catch (err) {
-            const errors = err.errors.map(e => ({ message: e.message, type: e.type, path: e.path }));
-            return new responseBody.BadRequestError(errors, err.name);
+            return new responseBody.ValidationError(err);
         }
     }
 
@@ -63,14 +61,11 @@ class UserService {
             return new responseBody.Success({ uuid }, "User updated successfully");
         } catch (err) {
             if (err.name == "SequelizeValidationError") {
-                const errors = err.errors.map(e => ({ message: e.message, type: e.type, path: e.path }));
-                return new responseBody.BadRequestError(errors, err.name);
-
+                return new responseBody.ValidationError(err);
             }
 
             return new responseBody.NotFoundError([{
                 message: "Sorry! User NOT Found",
-                type: "Not Found",
                 path: uuid
             }]);
         }
@@ -85,13 +80,11 @@ class UserService {
         } catch (error) {
             return new responseBody.NotFoundError([{
                 message: "Sorry! User NOT Found",
-                type: "Not Found",
                 path: uuid
             }]);
         }
     }
 }
-
 
 const userService = new UserService();
 export default userService;

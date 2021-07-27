@@ -2,6 +2,7 @@ import Sequelize from "sequelize";
 import sequelize from "../database/adaptor.js";
 
 const { Model, DataTypes } = Sequelize;
+const VALID_CARD_TYPE = ['American Express', 'Visa', 'Mastercard'];
 
 class CreditCard extends Model {
   toJSON() {
@@ -25,13 +26,24 @@ CreditCard.init({
   },
   type: {
     type: DataTypes.ENUM({
-      values: ['American Express', 'Visa', 'Mastercard']
+      values: VALID_CARD_TYPE
     }),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isValidCardType(value) {
+        if (!VALID_CARD_TYPE.includes(value)) {
+          throw new Error('Valid card types are - ' + VALID_CARD_TYPE.join(', '));
+        }
+      }
+    }
   },
   credit_limit: {
-    type: DataTypes.DECIMAL(10, 2), // NUMERIC(precision = 10, scale = 2)
-    allowNull: true
+    type: DataTypes.DECIMAL(10, 2), // PostgreSQL NUMERIC(precision = 10, scale = 2)
+    allowNull: true,
+    validate: {
+      min: 1,
+      max: 99999999.99
+    }
   },
   expire_date: {
     type: DataTypes.DATEONLY,
