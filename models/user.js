@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/adaptor.js";
-import CreditCard from "./credit_card.js";
 
 const { Model, DataTypes } = Sequelize;
 

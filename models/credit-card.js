@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/adaptor.js";
-import User from "./user.js";
 
 const { Model, DataTypes } = Sequelize;
 

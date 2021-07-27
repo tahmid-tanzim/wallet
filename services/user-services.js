@@ -46,12 +46,10 @@ class UserService {
     }
 
     async create(requestBody) {
-        // console.log('REQUEST Body - ', { first_name, last_name, email, date_of_birth });
         try {
             const user = await User.create(requestBody);
             return user;
         } catch (error) {
-            // console.log('Create Error - ', error);
             throw new exceptions.BadRequestError(error)
         }
     }

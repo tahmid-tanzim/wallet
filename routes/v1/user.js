@@ -1,20 +1,26 @@
 import express from "express";
 import httpStatusCodes from "http-status-codes";
 import userService from "../../services/user-services.js";
+import creditCardRouter from "./credit-card.js"
+const userRouter = express.Router();
 
-const router = express.Router();
+// const creditCardRouter = express.Router({mergeParams: true});
 
-router.get("/:uuid", async (req, res, next) => {
+userRouter.use('/:userUUID/credit-cards', creditCardRouter);
+
+// GET ONE User
+userRouter.get("/:userUUID", async (req, res, next) => {
     let result;
     try {
-        result = await userService.getOne(req.params.uuid);
+        result = await userService.getOne(req.params.userUUID);
         return res.status(httpStatusCodes.OK).send(result);
     } catch (error) {
         throw new Error(error);
     }
 });
 
-router.get("/", async (req, res, next) => {
+// GET ALL Users
+userRouter.get("/", async (req, res, next) => {
     let result;
     try {
         result = await userService.getAll();
@@ -24,7 +30,8 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.post("/", async (req, res, next) => {
+// CREATE ONE User
+userRouter.post("/", async (req, res, next) => {
     let result;
     try {
         result = await userService.create(req.body);
@@ -35,25 +42,27 @@ router.post("/", async (req, res, next) => {
     }
 });
 
-router.put("/:uuid", async (req, res, next) => {
+// UPDATE ONE User
+userRouter.put("/:userUUID", async (req, res, next) => {
     try {
-        await userService.update(req.params.uuid, req.body);
+        await userService.update(req.params.userUUID, req.body);
         return res.status(httpStatusCodes.OK).send({message: "User updated successfully"});
     } catch (error) {
         throw new Error(error);
     }
 });
 
-router.delete("/:uuid", async (req, res, next) => {
+// DELETE ONE User
+userRouter.delete("/:userUUID", async (req, res, next) => {
     try {
-        await userService.delete(req.params.uuid);
+        await userService.delete(req.params.userUUID);
         return res.status(httpStatusCodes.OK).send({message: "User deleted successfully"});
     } catch (error) {
         throw new Error(error);
     }
 });
 
-// router.get("/error", async (req, res, next) => {
+// userRouter.get("/error", async (req, res, next) => {
 //     let result;
 //     try {
 //         result = await userService.getUsersFails();
@@ -63,4 +72,4 @@ router.delete("/:uuid", async (req, res, next) => {
 //     }
 // });
 
-export default router;
+export default userRouter;
