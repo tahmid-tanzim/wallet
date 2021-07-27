@@ -27,22 +27,22 @@ docker run -p 3000:3000 -d tanzim/wallet
 | 13  | DELETE    | /v1/credit-cards/:creditCardUUID                 | Delete credit card (#13 == #14) |
 | 14  | DELETE    | /v1/users/:userUUID/credit-cards/:creditCardUUID | Delete credit card (#13 == #14) |
 
-### Request Body
-| #  | Model      | Request Body                                 | 
-|:--:|:-----------|:---------------------------------------------|
-| 1  | User       |```
-                    {
-                        "first_name": "Tahmid", 
-                        "last_name": "Tanzim",
-                        "email": "tahmid.tanzim@gmail.com", 
-                        "date_of_birth": "1945-02-06"
-                    }        
-                   ```                                           |
-| 2  | CreditCard |```
-                    {
-                        "number": "4012888888881881", 
-                        "type": "Visa",
-                        "credit_limit": 1234.56, 
-                        "expire_date": "1965-01-11"
-                    } 
-                    ```                                           | 
+### User Request Body
+```
+{
+    "first_name": "Tahmid", 
+    "last_name": "Tanzim",
+    "email": "tahmid.tanzim@gmail.com", 
+    "date_of_birth": "1945-02-06"
+}        
+```                                           
+
+### CreditCard Request Body
+```
+{
+    "number": "4012888888881881", 
+    "type": "Visa",
+    "credit_limit": 1234.56, 
+    "expire_date": "1965-01-11"
+} 
+```                                           
