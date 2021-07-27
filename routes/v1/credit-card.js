@@ -1,45 +1,36 @@
 import express from "express";
-import httpStatusCodes from "http-status-codes";
 import creditCardController from "../../controllers/credit-card-controller.js";
-import creditCardService from "../../services/credit-card-services.js";
 
-const creditCardRouter = express.Router({mergeParams: true});
+const creditCardRouter = {
+    parentNode: express.Router(),
+    leafNode: express.Router({ mergeParams: true })
+};
 
-// GET ONE User
-// creditCardRouter.get("/:creditCardUUID", async (req, res, next) => {
-//     let result;
-//     try {
-//         result = await userService.getOne(req.params.creditCardUUID);
-//         return res.status(httpStatusCodes.OK).send(result);
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// });
+// GET ONE CreditCard
+creditCardRouter.parentNode.get("/:creditCardUUID", creditCardController.getOne);
 
-// GET ALL CreditCards of a User
-creditCardRouter.get("/", creditCardController.getAllByUser);
+// GET ONE CreditCard of a User
+creditCardRouter.leafNode.get("/:creditCardUUID", creditCardController.getOne);
+
+// GET ALL CreditCards
+creditCardRouter.parentNode.get("/", creditCardController.getAll);
+
+// GET CreditCards of a User
+creditCardRouter.leafNode.get("/", creditCardController.getAllByUser);
 
 // CREATE ONE CreditCard to a User
-creditCardRouter.post("/", creditCardController.createByUser);
+creditCardRouter.leafNode.post("/", creditCardController.createByUser);
 
-// UPDATE ONE User
-// creditCardRouter.put("/:creditCardUUID", async (req, res, next) => {
-//     try {
-//         await userService.update(req.params.creditCardUUID, req.body);
-//         return res.status(httpStatusCodes.OK).send({message: "User updated successfully"});
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// });
+// UPDATE ONE CreditCard
+creditCardRouter.parentNode.put("/:creditCardUUID", creditCardController.update);
 
-// DELETE ONE User
-// creditCardRouter.delete("/:creditCardUUID", async (req, res, next) => {
-//     try {
-//         await userService.delete(req.params.creditCardUUID);
-//         return res.status(httpStatusCodes.OK).send({message: "User deleted successfully"});
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// });
+// UPDATE ONE CreditCard of a User
+creditCardRouter.leafNode.put("/:creditCardUUID", creditCardController.update);
+
+// DELETE ONE CreditCard
+creditCardRouter.parentNode.delete("/:creditCardUUID", creditCardController.delete);
+
+// DELETE ONE CreditCard of a User
+creditCardRouter.leafNode.delete("/:creditCardUUID", creditCardController.delete);
 
 export default creditCardRouter;

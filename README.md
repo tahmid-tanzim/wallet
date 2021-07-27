@@ -3,12 +3,8 @@
 A simple CRUD application with User & Credit Card as One-to-Many relationship.
 
 * npm install
+* npm run db:create
 * npm run dev
 
-### Initial PostgreSQL Database Setup
-Run below command in terminal to create database.
-`psql -U postgres -W`
-```
-SELECT 'CREATE DATABASE shopping_cart' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'shopping_cart')\gexec
-```
-
+docker build . -t tanzim/wallet
+docker run -p 3000:3000 -d tanzim/wallet

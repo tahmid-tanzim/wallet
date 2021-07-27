@@ -3,7 +3,7 @@ import userController from "../../controllers/user-controller.js";
 import creditCardRouter from "./credit-card.js"
 const userRouter = express.Router();
 
-userRouter.use('/:userUUID/credit-cards', creditCardRouter);
+userRouter.use('/:userUUID/credit-cards', creditCardRouter.leafNode);
 
 // GET ONE User
 userRouter.get("/:userUUID", userController.get);
