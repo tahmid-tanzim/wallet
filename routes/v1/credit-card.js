@@ -1,5 +1,6 @@
 import express from "express";
 import httpStatusCodes from "http-status-codes";
+import creditCardController from "../../controllers/credit-card-controller.js";
 import creditCardService from "../../services/credit-card-services.js";
 
 const creditCardRouter = express.Router({mergeParams: true});
@@ -15,28 +16,11 @@ const creditCardRouter = express.Router({mergeParams: true});
 //     }
 // });
 
-// GET ALL CreditCards
-creditCardRouter.get("/", async (req, res, next) => {
-    let result;
-    try {
-        result = await creditCardService.getAll(req.params.userUUID);
-        return res.status(httpStatusCodes.OK).send(result);
-    } catch (error) {
-        throw new Error(error);
-    }
-});
+// GET ALL CreditCards of a User
+creditCardRouter.get("/", creditCardController.getAllByUser);
 
-// CREATE ONE CreditCard
-creditCardRouter.post("/", async (req, res, next) => {
-    let result;
-    try {
-        result = await creditCardService.create(req.params.userUUID, req.body);
-        return res.status(httpStatusCodes.CREATED).send(result);
-    } catch (error) {
-        throw new Error(error);
-        // return res.status(httpStatusCodes.BAD_REQUEST).send({message: 'Baaad Request'});
-    }
-});
+// CREATE ONE CreditCard to a User
+creditCardRouter.post("/", creditCardController.createByUser);
 
 // UPDATE ONE User
 // creditCardRouter.put("/:creditCardUUID", async (req, res, next) => {
