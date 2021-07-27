@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "Wallet (PROD)",
+    "port": 8080,
+    "dbConfig": {
+      "database": "wallet_production",
+      "username": "root",
+      "password": null,
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  }
+}

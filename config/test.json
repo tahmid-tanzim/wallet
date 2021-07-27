@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "Wallet (TEST)",
+    "port": 3001,
+    "dbConfig": {
+      "database": "wallet_test",
+      "username": "root",
+      "password": null,
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  }
+}

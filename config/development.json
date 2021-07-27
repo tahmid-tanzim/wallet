@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "Wallet (DEV)",
+    "port": 3000,
+    "dbConfig": {
+      "database": "wallet_development",
+      "username": "postgres",
+      "password": "postgres",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  }
+}
