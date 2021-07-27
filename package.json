@@ -8,10 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development node --experimental-modules --experimental-json-modules --nolazy index.js",
+    "start": "NODE_ENV=production node --experimental-modules --experimental-json-modules --nolazy index.js",
     "dev": "NODE_ENV=development nodemon --experimental-modules --experimental-json-modules --nolazy index.js",
-    "db:create": "sequelize-cli db:create",
-    "db:migrate": "node ./bin/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

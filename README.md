@@ -2,13 +2,13 @@
 
 A simple CRUD application with User & Credit Card as One-to-Many relationship.
 
-* npm install
-* npm run db:create
-* npm run dev
+### Development Environment Setup
+1. Run `npm install`
+2. Create local PostgreSQL Database `wallet_development` and update username & password in `/config/development.json`
+3. npm run dev
 
-### Docker
-docker build . -t tanzim/wallet
-docker run -p 3000:3000 -d tanzim/wallet
+### Production Environment Setup
+1. docker-compose up
 
 ### API Documentation
 | #   | HTTP Verb | Request URL                                      | Remarks                         |

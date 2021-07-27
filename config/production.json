@@ -4,9 +4,9 @@
     "port": 8080,
     "dbConfig": {
       "database": "wallet_production",
-      "username": "root",
-      "password": null,
-      "host": "127.0.0.1",
+      "username": "admin",
+      "password": "C0V1D19",
+      "host": "postgres",
       "dialect": "postgres"
     }
   }
