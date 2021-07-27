@@ -90,10 +90,18 @@ class CreditCardService {
 
     async update(uuid, requestBody) {
         try {
-            await CreditCard.update(requestBody, {
+            const [count] = await CreditCard.update(requestBody, {
                 where: { uuid }
             });
-            return new responseBody.Success({ uuid }, "Credit Card updated successfully");
+
+            if (count >= 1) {
+                return new responseBody.Success({ uuid }, "Credit Card updated successfully");
+            }
+
+            return new responseBody.BadRequestError([{
+                message: "Sorry! Credit Card is NOT updated",
+                path: uuid
+            }]);
         } catch (err) {
             if (err.name == "SequelizeValidationError") {
                 return new responseBody.ValidationError(err);
@@ -108,10 +116,18 @@ class CreditCardService {
 
     async delete(uuid) {
         try {
-            await CreditCard.destroy({
+            const [count] = await CreditCard.destroy({
                 where: { uuid }
             });
-            return new responseBody.Success({ uuid }, "Credit Card removed successfully");
+
+            if (count >= 1) {
+                return new responseBody.Success({ uuid }, "Credit Card removed successfully");
+            }
+
+            return new responseBody.BadRequestError([{
+                message: "Sorry! Credit Card is NOT removed",
+                path: uuid
+            }]);
         } catch (err) {
             return new responseBody.NotFoundError([{
                 message: "Sorry! Credit Card NOT Found",

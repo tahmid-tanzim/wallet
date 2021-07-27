@@ -85,7 +85,7 @@ class ForbiddenError extends ResponseBody {
 }
 
 class ValidationError extends ResponseBody {
-    constructor(error, message = "BAD REQUEST") {
+    constructor(error, message = "VALIDATION ERROR") {
         super(httpStatusCodes.BAD_REQUEST, error.name || message);
         const errors = error.errors.map(e => ({ message: e.message, type: e.type, path: e.path, value: e.value }));
         return this.getResponse(errors);

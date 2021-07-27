@@ -55,10 +55,19 @@ class UserService {
 
     async update(uuid, requestBody) {
         try {
-            await User.update(requestBody, {
+            const [count] = await User.update(requestBody, {
                 where: { uuid }
             });
-            return new responseBody.Success({ uuid }, "User updated successfully");
+
+            if (count >= 1) {
+                return new responseBody.Success({ uuid }, "User updated successfully");
+            }
+
+            return new responseBody.BadRequestError([{
+                message: "Sorry! User is NOT updated",
+                path: uuid
+            }]);
+
         } catch (err) {
             if (err.name == "SequelizeValidationError") {
                 return new responseBody.ValidationError(err);
@@ -73,10 +82,18 @@ class UserService {
 
     async delete(uuid) {
         try {
-            await User.destroy({
+            const [count] = await User.destroy({
                 where: { uuid }
             });
-            return new responseBody.Success({ uuid }, "User removed successfully");
+
+            if (count >= 1) {
+                return new responseBody.Success({ uuid }, "User removed successfully");
+            }
+
+            return new responseBody.BadRequestError([{
+                message: "Sorry! User is NOT removed",
+                path: uuid
+            }]);
         } catch (error) {
             return new responseBody.NotFoundError([{
                 message: "Sorry! User NOT Found",
