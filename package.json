@@ -1,7 +1,7 @@
 {
   "name": "wallet",
   "version": "1.0.0",
-  "description": "A simple CRUD application with User & Credit Card as One-to-Many relationship.",
+  "description": "A simple CRUD application with User & Credit Card model as One-to-Many relationship.",
   "main": "index.js",
   "directories": {
     "test": "tests"

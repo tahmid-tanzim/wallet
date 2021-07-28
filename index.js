@@ -9,9 +9,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/", index);
 app.use("/v1/users", users);
 app.use("/v1/credit-cards", creditCards.parentNode);
+app.use("*", index);
 
 const port = config.get('service.port') || 3030;
 const serviceName = config.get('service.name');

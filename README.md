@@ -1,14 +1,14 @@
 # Wallet
 
-A simple CRUD application with User & Credit Card as One-to-Many relationship.
+A simple CRUD application with User & Credit Card model as One-to-Many relationship.
 
 ### Development Environment Setup
 1. Run `npm install`
 2. Create local PostgreSQL Database `wallet_development` and update username & password in `/config/development.json`
-3. npm run dev
+3. Run `npm run dev`
 
 ### Production Environment Setup
-1. docker-compose up
+1. Run `docker-compose up`
 
 ### API Documentation
 | #   | HTTP Verb | Request URL                                      | Remarks                         |

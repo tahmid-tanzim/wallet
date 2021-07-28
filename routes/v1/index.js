@@ -3,8 +3,8 @@ import httpStatusCodes from "http-status-codes";
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
-      return res.status(httpStatusCodes.OK).send({ message: "Welcome to WALLET Application" });
+router.all("*", async (req, res, next) => {
+      return res.status(httpStatusCodes.NOT_FOUND).send({ message: "404 Not Found" });
 });
 
 export default router;
