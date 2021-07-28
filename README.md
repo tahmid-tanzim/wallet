@@ -47,4 +47,7 @@ A simple CRUD application with User & Credit Card model as One-to-Many relations
     "credit_limit": 1234.56, 
     "expire_date": "1965-01-11"
 } 
-```                                           
+```    
+
+### Postman Link
+https://www.getpostman.com/collections/a805484f5cce72645df5
