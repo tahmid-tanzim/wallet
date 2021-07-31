@@ -10,7 +10,7 @@
   "scripts": {
     "start": "NODE_ENV=production node --experimental-modules --experimental-json-modules --nolazy index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test mocha --exit",
     "test:watch": "jest --watch"
   },
   "repository": {
