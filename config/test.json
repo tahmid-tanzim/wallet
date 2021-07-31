@@ -4,8 +4,8 @@
     "port": 3001,
     "dbConfig": {
       "database": "wallet_test",
-      "username": "root",
-      "password": null,
+      "username": "postgres",
+      "password": "postgres",
       "host": "127.0.0.1",
       "dialect": "postgres"
     }

@@ -20,9 +20,9 @@ app.listen({ port }, async () => {
     if (process.env.NODE_ENV === 'production') {
         await sequelize.sync();
     } else {
-        await sequelize.sync({ force: true, match: /_development$/ });
+        await sequelize.sync({ force: true, match: /[\/_](test|development)$/i });
     }
     console.log(`${serviceName} database connected!`);
 });
 
-export default app;
+export const server = app;
