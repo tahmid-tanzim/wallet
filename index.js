@@ -15,14 +15,15 @@ app.use("*", index);
 
 const port = config.get('service.port') || 3030;
 const serviceName = config.get('service.name');
+
 app.listen({ port }, async () => {
-    console.log(`${serviceName} service running on port - ${port}`);
     if (process.env.NODE_ENV === 'production') {
         await sequelize.sync();
     } else {
         await sequelize.sync({ force: true, match: /_development$/ });
     }
     console.log(`${serviceName} database connected!`);
+    console.log(`${serviceName} service running on port - ${port}`);
 });
 
 export default app;
