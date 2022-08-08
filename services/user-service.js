@@ -82,7 +82,7 @@ class UserService {
 
     async delete(uuid) {
         try {
-            const [count] = await User.destroy({
+            const count = await User.destroy({
                 where: { uuid }
             });
 

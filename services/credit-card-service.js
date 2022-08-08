@@ -116,7 +116,7 @@ class CreditCardService {
 
     async delete(uuid) {
         try {
-            const [count] = await CreditCard.destroy({
+            const count = await CreditCard.destroy({
                 where: { uuid }
             });
 
